@@ -15,25 +15,25 @@ resource "aws_iam_role" "tf_role" {
   name = "tf_role"
 
   assume_role_policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": "sts:AssumeRoleWithWebIdentity",
-            "Principal": {
-                "Federated": "arn:aws:iam::${var.aws_account_id}:oidc-provider/token.actions.githubusercontent.com"
-            },
-            "Condition": {
-                "StringEquals": {
-                    "token.actions.githubusercontent.com:aud": [
-                        "sts.amazonaws.com"
-                    ],
-                    "token.actions.githubusercontent.com:sub": [
-                        var.github_iac_repo
-                    ]
-                }
-            }
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : "sts:AssumeRoleWithWebIdentity",
+        "Principal" : {
+          "Federated" : "arn:aws:iam::${var.aws_account_id}:oidc-provider/token.actions.githubusercontent.com"
+        },
+        "Condition" : {
+          "StringEquals" : {
+            "token.actions.githubusercontent.com:aud" : [
+              "sts.amazonaws.com"
+            ],
+            "token.actions.githubusercontent.com:sub" : [
+              var.github_iac_repo
+            ]
+          }
         }
+      }
     ]
   })
 
@@ -46,25 +46,25 @@ resource "aws_iam_role" "ecr_role" {
   name = "ecr_role"
 
   assume_role_policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": "sts:AssumeRoleWithWebIdentity",
-            "Principal": {
-                "Federated": "arn:aws:iam::${var.aws_account_id}:oidc-provider/token.actions.githubusercontent.com"
-            },
-            "Condition": {
-                "StringEquals": {
-                    "token.actions.githubusercontent.com:aud": [
-                        "sts.amazonaws.com"
-                    ],
-                    "token.actions.githubusercontent.com:sub": [
-                        var.github_app_repo
-                    ]
-                }
-            }
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : "sts:AssumeRoleWithWebIdentity",
+        "Principal" : {
+          "Federated" : "arn:aws:iam::${var.aws_account_id}:oidc-provider/token.actions.githubusercontent.com"
+        },
+        "Condition" : {
+          "StringEquals" : {
+            "token.actions.githubusercontent.com:aud" : [
+              "sts.amazonaws.com"
+            ],
+            "token.actions.githubusercontent.com:sub" : [
+              var.github_app_repo
+            ]
+          }
         }
+      }
     ]
   })
 
@@ -72,34 +72,34 @@ resource "aws_iam_role" "ecr_role" {
     name = "ecr-app-permission"
 
     policy = jsonencode({
-      "Version": "2012-10-17",
-      "Statement": [
+      "Version" : "2012-10-17",
+      "Statement" : [
         {
-         "Action": "apprunner:*" 
-         "Effect": "Allow",
-         "Resource": "*"
+          "Action" : "apprunner:*"
+          "Effect" : "Allow",
+          "Resource" : "*"
         },
         {
-         "Action": [
+          "Action" : [
             "iam:PassRole",
             "iam:CreateServiceLinkedRole"
-         ],
-         "Effect": "Allow",
-         "Resource": "*"
+          ],
+          "Effect" : "Allow",
+          "Resource" : "*"
         },
         {
-          "Effect": "Allow",
-          "Action": [
-              "ecr:GetDownloadUrlForLayer",
-              "ecr:BatchGetImage",
-              "ecr:BatchCheckLayerAvailability",
-              "ecr:PutImage",
-              "ecr:InitiateLayerUpload",
-              "ecr:UploadLayerPart",
-              "ecr:CompleteLayerUpload",
-              "ecr:GetAuthorizationToken"
+          "Effect" : "Allow",
+          "Action" : [
+            "ecr:GetDownloadUrlForLayer",
+            "ecr:BatchGetImage",
+            "ecr:BatchCheckLayerAvailability",
+            "ecr:PutImage",
+            "ecr:InitiateLayerUpload",
+            "ecr:UploadLayerPart",
+            "ecr:CompleteLayerUpload",
+            "ecr:GetAuthorizationToken"
           ],
-          "Resource": "*"
+          "Resource" : "*"
         }
       ]
     })
@@ -114,14 +114,14 @@ resource "aws_iam_role" "app_runner_role" {
   name = "app_runner_role"
 
   assume_role_policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
+    "Version" : "2012-10-17",
+    "Statement" : [
       {
-        "Effect": "Allow",
-        "Principal": {
-          "Service": "build.apprunner.amazonaws.com"
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "build.apprunner.amazonaws.com"
         },
-        "Action": "sts:AssumeRole"
+        "Action" : "sts:AssumeRole"
       }
     ]
   })
@@ -135,4 +135,4 @@ resource "aws_iam_role" "app_runner_role" {
   }
 }
 
-  
+
