@@ -10,12 +10,20 @@ jobs:
   run-terraform:
     name: 'Run Terraform'
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+      TF_VAR_thumbprint: ${{ secrets.THUMBPRINT }}
+      TF_VAR_github_app_repo: ${{ secrets.GH_APP_REPO }}
+      TF_VAR_github_iac_repo: ${{ secrets.GH_IAC_REPO }}
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ''
+          role-to-assume: 'arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/tf_role'
           aws-region: us-east-2
 
       - name: Setup Terraform
