@@ -11,7 +11,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 **AWS SSO**
 
 ```bash
-aws sso configure
+aws sso configure --profile {$profileName}
 aws sso login --profile {$profileName}
 ```
 
@@ -54,18 +54,12 @@ You can create them in the Github UI:
 Now we need to apply the changes locally, and get the ARN of the role that we will use in the next step.
 
 ```bash
-terraform apply -var-file=secret.tfvars
+AWS_PROFILE={your_aws_profile} terraform apply -var-file="secret.tfvars"
 ```
 
 Type `yes` to apply the changes.
 
-Go to your AWS console and open the IAM console.
-On Roles, click in the new role that was created `tf_role` and copy the ARN.
-
-![alt text](assets/tf_role.png)
-
-Now we need to create a Github Secret with the ARN of the role, and the name `ARN_TF_ROLE`.
-You can follow the same steps as in the previous section.
+Now we have deployed the App on App Runner, but, we still have work to do, to make the CD process automated.
 
 ## Deployment
 

@@ -10,13 +10,13 @@ variable "thumbprint" {
   sensitive   = true
 }
 
-variable "github_iac_repo" {
+variable "gh_iac_repo" {
   description = "Github repository, e.g. repo:{username}/{repo}:ref:refs/heads/{branch}"
   type        = string
   sensitive   = true
 }
 
-variable "github_app_repo" {
+variable "gh_app_repo" {
   description = "Github repository, e.g. repo:{username}/{repo}:ref:refs/heads/{branch}"
   type        = string
   sensitive   = true

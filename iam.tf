@@ -29,13 +29,33 @@ resource "aws_iam_role" "tf_role" {
               "sts.amazonaws.com"
             ],
             "token.actions.githubusercontent.com:sub" : [
-              var.github_iac_repo
+              var.gh_iac_repo
             ]
           }
         }
       }
     ]
   })
+
+  inline_policy {
+    name = "tf-iac-permission"
+
+    policy = jsonencode({
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Action" : "ecr:*"
+          "Effect" : "Allow",
+          "Resource" : "*"
+        },
+        {
+          "Action" : "iam:*"
+          "Effect" : "Allow",
+          "Resource" : "*"
+        },
+      ]
+    })
+  }
 
   tags = {
     IaC = "True"
@@ -60,7 +80,7 @@ resource "aws_iam_role" "ecr_role" {
               "sts.amazonaws.com"
             ],
             "token.actions.githubusercontent.com:sub" : [
-              var.github_app_repo
+              var.gh_app_repo
             ]
           }
         }
