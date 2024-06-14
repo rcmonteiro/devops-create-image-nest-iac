@@ -4,6 +4,12 @@ variable "aws_account_id" {
   sensitive   = true
 }
 
+variable "aws_region" {
+  description = "AWS Region"
+  type        = string
+  sensitive   = true
+}
+
 variable "thumbprint" {
   description = "SHA1 Fingerprint"
   type        = string

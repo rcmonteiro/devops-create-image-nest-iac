@@ -15,6 +15,11 @@ aws sso configure --profile {$profileName}
 aws sso login --profile {$profileName}
 ```
 
+## Create a Github Action Variable for the Terraform CLI Version
+You can create them in the Github UI: 
+`https://github.com/{user}/{repo}/settings/variables/actions`
+![alt text](assets/tf_version.png)
+
 ## Sensitive data
 
 For the `thumbprint` run the command below
@@ -31,6 +36,7 @@ Edit `secret.tfvars` and add your Github repository
 
 ```hcl
 aws_account_id  = "{AWS Account ID}"
+aws_region      = "{AWS Region}"
 thumbprint      = "{SHA1 Fingerprint}"
 gh_iac_repo     = "repo:{username}/{repo}:ref:refs/heads/{branch}"
 gh_app_repo     = "repo:{username}/{repo}:ref:refs/heads/{branch}"
