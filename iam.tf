@@ -53,6 +53,11 @@ resource "aws_iam_role" "tf_role" {
           "Effect" : "Allow",
           "Resource" : "*"
         },
+        {
+          "Action" : "s3:*"
+          "Effect" : "Allow",
+          "Resource" : "*"
+        },
       ]
     })
   }
