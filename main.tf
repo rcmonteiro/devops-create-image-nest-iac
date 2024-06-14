@@ -8,6 +8,5 @@ terraform {
 }
 
 provider "aws" {
-  profile = "rcmonteiro-iac"
   region  = "us-east-2"
 }
