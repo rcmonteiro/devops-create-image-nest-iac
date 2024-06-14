@@ -65,12 +65,6 @@ AWS_PROFILE={your_aws_profile} terraform apply -var-file="secret.tfvars"
 
 Type `yes` to apply the changes.
 
-Now we have deployed the App on App Runner, but, we still have work to do, to make the CD process automated.
-
-## Deployment
-
-```bash
-terraform init
-terraform plan
-terraform apply
-```
+Now we can commit the changes to the repository, and check the logs for the pipeline.
+For this example, nothing will be changed, since we have already applied the changes locally.
+But If you add a new resource, like a new S3 bucket, you will see the changes in the pipeline, and they will be created in the AWS account.
